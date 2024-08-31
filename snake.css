@@ -1,0 +1,11 @@
+html {
+    background-color: black;
+    color: greenyellow;
+    font-family: 'Andale Mono';
+}
+canvas {
+    border: solid white 1px;
+    position: absolute;
+    top: 75px;
+    left:400px
+}
