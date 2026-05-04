@@ -5,6 +5,8 @@ const highScoreDisplay = document.getElementById("hiscore");
 
 const PI = Math.PI;
 
+var interval;
+var timer = 50;
 var score = 0;
 var highScore = 0;
 var map = new Array(50);
@@ -43,6 +45,11 @@ function move() {
     else {
         if(x == apple[0] && y == apple[1]) {
             score++;
+            if(timer > 0) {
+                --timer
+                clearInterval(interval);
+                interval = setInterval(update, timer);
+            }
             scoreDisplay.textContent = "Score: " + score;
             if(score > highScore) {
                 highScore = score;
@@ -70,7 +77,7 @@ function draw() {
     for(var x = 0; x < 50; ++x) {
         for(var y = 0; y < 50; ++y) {
             if(map[x][y] > 0) {
-                ctx.fillStyle = "rgb(" + eval(Math.sin((map[x][y] / (score+1))*PI)*127 + 127) + ", " + eval(Math.cos((map[x][y] / (score+1))*PI)*127 + 127) + ", " + eval(Math.cos((map[x][y] / (score+1))*PI + 3)*127 + 127) + ")";
+                ctx.fillStyle = "rgb(" + eval(Math.sin((map[x][y] * 0.05)*127 + 127) + ", " + eval(Math.cos((map[x][y] *0.05)*127 + 127) + ", " + eval(Math.cos((map[x][y] * 0.05 + 3)*127 + 127) + ")";
                 ctx.fillRect(x*12, y*12, 12, 12);
             }
             else if(x == apple[0] && y == apple[1]) {
@@ -130,4 +137,4 @@ function update() {
     }
     draw();
 }
-var interval = setInterval(update, 20);
+interval = setInterval(update, timer);
