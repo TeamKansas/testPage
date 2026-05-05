@@ -46,7 +46,7 @@ function move() {
         if(x == apple[0] && y == apple[1]) {
             score++;
             if(timer > 0) {
-                --timer
+                --timer;
                 clearInterval(interval);
                 interval = setInterval(update, timer);
             }
@@ -77,7 +77,7 @@ function draw() {
     for(var x = 0; x < 50; ++x) {
         for(var y = 0; y < 50; ++y) {
             if(map[x][y] > 0) {
-                ctx.fillStyle = "rgb(" + eval(Math.sin((map[x][y] * 0.05)*127 + 127) + ", " + eval(Math.cos((map[x][y] *0.05)*127 + 127) + ", " + eval(Math.cos((map[x][y] * 0.05 + 3)*127 + 127) + ")";
+                ctx.fillStyle = "rgb(" + eval(Math.sin(map[x][y] * 0.07)*127 + 127) + ", " + eval(Math.cos(map[x][y] * 0.07)*127 + 127) + ", " + eval(Math.cos(map[x][y] * 0.07 + 3)*127 + 127) + ")";
                 ctx.fillRect(x*12, y*12, 12, 12);
             }
             else if(x == apple[0] && y == apple[1]) {
@@ -128,6 +128,9 @@ document.addEventListener("keydown", function(event) {
     }
     else if(key == ' ' && !playing) {
         reset();
+        timer = 50;
+        clearInterval(interval);
+        interval = setInterval(update, timer);
         document.getElementById("gameOver").hidden = true;
     }
 });
